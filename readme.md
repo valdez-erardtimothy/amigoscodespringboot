@@ -21,3 +21,12 @@ I have MariaDB on my local dev environment already set up.
 ### Starting the Server
 
 - instead of the IntelliJ IDEA Ultimate Edition Spring Boot Application run feature, I made a maven configuration to run `spring-boot:run` via `mvnw`
+
+### Properties file 
+
+- adjusted JPA properties for MariaDB
+
+### Creating and Connecting to Database
+
+- used `amigoscodespringboot` as database name
+- adjusted to use MariaDB
