@@ -1,6 +1,7 @@
 package valdezet.amigoscodespringboot.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -44,25 +45,42 @@ public class StudentService {
 
         Student existingStudent = studentRepository.findById(studentId)
                 .orElseThrow(() -> produceNotExistsExceptionObject(studentId));
-        if (!newEmail.equals(existingStudent.getEmail())) {
-            ensureUniqueEmail(existingStudent);
+
+        if (shouldUpdateStringField(newName, existingStudent.getName())) {
+            existingStudent.setName(newName);
         }
-        existingStudent.setName(newName);
-        existingStudent.setEmail(newEmail);
+        if (shouldUpdateStringField(newEmail, existingStudent.getEmail())) {
+            if (!newEmail.equals(existingStudent.getEmail())) {
+                ensureUniqueEmail(newEmail);
+            }
+            existingStudent.setEmail(newEmail);
+        }
 
     }
 
     /* validation methods */
 
+    private static boolean shouldUpdateStringField(@Nullable String newValue, String oldValue) {
+        return newValue != null && !newValue.equals(oldValue) && newValue.length() > 0;
+    }
+
+    /**
+     * overload of below method to check against instantiated email
+     *
+     * @param student the student to be added to database (via POST request)
+     */
+    private void ensureUniqueEmail(Student student) throws IllegalStateException {
+        ensureUniqueEmail(student.getEmail());
+    }
+
     /**
      * checks a new Student's (not yet saved) email
      * if it already exists in the database.
      *
-     * @param student the student to be added to database (via POST request)
      * @throws IllegalStateException simple exception thrown for the sake of the course.
      */
-    private void ensureUniqueEmail(Student student) throws IllegalStateException {
-        Optional<Student> queriedStudents = studentRepository.findStudentByEmail(student.getEmail());
+    private void ensureUniqueEmail(String email) throws IllegalStateException {
+        Optional<Student> queriedStudents = studentRepository.findStudentByEmail((email));
         if (queriedStudents.isPresent()) {
             throw new IllegalStateException("Email is already taken.");
         }

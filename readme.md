@@ -38,3 +38,7 @@ I have MariaDB on my local dev environment already set up.
 ### Deleting Students
 
 - used String.format on StudentService.deleteStudent exception throw
+
+### Exercise and Exercise Solution
+
+- validation methods of update fields are in separate method (still in the same class)
