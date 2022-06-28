@@ -2,6 +2,8 @@
 
 codes as I follow through the course.
 
+DONE 2022-06-28 12pm
+
 ## Deviations from the tutorial
 
 changes are listed on a per-chapter basis
