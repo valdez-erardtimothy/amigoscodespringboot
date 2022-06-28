@@ -30,3 +30,7 @@ I have MariaDB on my local dev environment already set up.
 
 - used `amigoscodespringboot` as database name
 - adjusted to use MariaDB
+
+### Writing Some Business Logic
+
+- unique email validation on `StudentService.addNewStudent` extracted to a new method in class
