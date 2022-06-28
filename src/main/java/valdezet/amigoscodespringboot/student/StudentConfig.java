@@ -16,14 +16,12 @@ public class StudentConfig {
             Student example = new Student(
                     "Example",
                     "example@example.local",
-                    22,
                     LocalDate.of(2000, Month.JANUARY,1)
             );
 
             Student juan = new Student(
                     "Juan",
                     "Juan@example.local",
-                    22, // disregard inaccurate a ge
                     LocalDate.of(2005, Month.JANUARY, 1)
             );
 

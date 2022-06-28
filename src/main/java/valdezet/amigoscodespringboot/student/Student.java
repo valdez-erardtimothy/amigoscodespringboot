@@ -2,6 +2,7 @@ package valdezet.amigoscodespringboot.student;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table
@@ -13,31 +14,30 @@ public class Student {
             allocationSize = 1
     )
     @GeneratedValue(
-            strategy =GenerationType.SEQUENCE,
+            strategy = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
     private Long id;
     private String name;
     private String email;
-    private Integer age;
     private LocalDate dob;
+    @Transient
+    private Integer age;
 
 
     public Student() {
     }
 
-    public Student(Long id, String name, String email, Integer age, LocalDate dob) {
+    public Student(Long id, String name, String email, LocalDate dob) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.age = age;
         this.dob = dob;
     }
 
-    public Student(String name, String email, Integer age, LocalDate dob) {
+    public Student(String name, String email, LocalDate dob) {
         this.name = name;
         this.email = email;
-        this.age = age;
         this.dob = dob;
     }
 
@@ -65,19 +65,18 @@ public class Student {
         this.email = email;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public LocalDate getDob() {
         return dob;
     }
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+    public Integer getAge() {
+        return Period.between(this.dob, LocalDate.now()).getYears();
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
