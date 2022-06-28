@@ -34,3 +34,7 @@ I have MariaDB on my local dev environment already set up.
 ### Writing Some Business Logic
 
 - unique email validation on `StudentService.addNewStudent` extracted to a new method in class
+
+### Deleting Students
+
+- used String.format on StudentService.deleteStudent exception throw
